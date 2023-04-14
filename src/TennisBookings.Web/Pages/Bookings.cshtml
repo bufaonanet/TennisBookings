@@ -1,0 +1,64 @@
+﻿@page
+@using TennisBookings.Web.Core
+@model BookingsModel
+@{
+    ViewData["Subject"] = "Your Bookings";
+}
+
+<h1>@ViewData["Subject"]</h1>
+
+@if (Model.BookingSuccess)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success">
+                <p><strong>You've successfully created a booking!</strong></p>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>@Model.Greeting</h2>
+        <br/>
+    </div>
+</div>
+
+@if (!Model.CourtBookings.Any())
+{
+    <div class="row">
+        <div class="col-md-12">
+            <p>You have no upcoming court bookings.</p>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Court</th>
+                        <th scope="col">Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var date in Model.CourtBookings)
+                    {
+                        @foreach (var booking in date)
+                        {
+                            <tr>
+                                <td>@date.Key.ToString("D")</td>
+                                <td>Court @booking.CourtId</td>
+                                <td>@booking.StartDateTime.Hour.To12HourClockString() to @booking.EndDateTime.Hour.To12HourClockString()</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

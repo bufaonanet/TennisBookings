@@ -1,0 +1,33 @@
+﻿@page
+@model TennisBookings.Web.Pages.EnquiryModel
+@{
+    ViewData["Subject"] = "Member Enquiry";
+}
+
+<h1>Make an Enquiry!</h1>
+
+<form method="post">
+    <div class="row">
+        <div class="col-12">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" placeholder="Enter email" />
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subject"></label>
+                <input asp-for="Subject" class="form-control" placeholder="Provide a subject" />
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message"></label>
+                <textarea asp-for="Message" class="form-control" rows="3" placeholder="Your enquiry"></textarea>
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>
